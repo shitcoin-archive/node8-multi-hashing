@@ -59,7 +59,7 @@ using namespace v8;
 
 #define RETURN_EXCEPT(msg) \
     do { \
-        isolate->ThrowException(Exception::Error(String::NewFromUtf8(Isolate::GetCurrent(), msg))); \
+        isolate->ThrowException(Exception::Error(String::NewFromUtf8(isolate, msg).ToLocalChecked())); \
         return; \
     } while (0)
 
