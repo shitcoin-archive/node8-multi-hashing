@@ -217,7 +217,7 @@ DECLARE_FUNC(cryptonight) {
 
     if (args.Length() >= 2) {
         if(args[1]->IsBoolean(isolate->GetCurrentContext()))
-            fast = args[1]->BooleanValue();
+            fast = args[1]->BooleanValue(isolate);
         else if(args[1]->IsUint32(isolate->GetCurrentContext()))
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
@@ -255,7 +255,7 @@ DECLARE_FUNC(cryptonightdark) {
 
     if (args.Length() >= 2) {
         if(args[1]->IsBoolean())
-            fast = args[1]->BooleanValue();
+            fast = args[1]->BooleanValue(isolate);
         else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
@@ -293,7 +293,7 @@ DECLARE_FUNC(cryptonightdarklite) {
 
     if (args.Length() >= 2) {
         if(args[1]->IsBoolean())
-            fast = args[1]->BooleanValue();
+            fast = args[1]->BooleanValue(isolate);
         else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
@@ -331,7 +331,7 @@ DECLARE_FUNC(cryptonightlite) {
 
     if (args.Length() >= 2) {
         if(args[1]->IsBoolean())
-            fast = args[1]->BooleanValue();
+            fast = args[1]->BooleanValue(isolate);
         else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
@@ -369,7 +369,7 @@ DECLARE_FUNC(cryptonightturtle) {
 
     if (args.Length() >= 2) {
         if(args[1]->IsBoolean())
-            fast = args[1]->BooleanValue();
+            fast = args[1]->BooleanValue(isolate);
         else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
@@ -407,7 +407,7 @@ DECLARE_FUNC(cryptonightturtlelite) {
 
     if (args.Length() >= 2) {
         if(args[1]->IsBoolean())
-            fast = args[1]->BooleanValue();
+            fast = args[1]->BooleanValue(isolate);
         else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
@@ -484,7 +484,7 @@ DECLARE_FUNC(cryptonightsoftshell) {
 
     if (args.Length() >= 2) {
         if(args[1]->IsBoolean())
-            fast = args[1]->BooleanValue();
+            fast = args[1]->BooleanValue(isolate);
         else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
@@ -492,7 +492,7 @@ DECLARE_FUNC(cryptonightsoftshell) {
     }
 
     if (args.Length() >= 3) {
-      if (args[2]->IsUint32(isolate->GetCurrentContext()))
+      if (args[2]->IsUint32())
         height = args[2]->Uint32Value(isolate->GetCurrentContext());
       else
         RETURN_EXCEPT("Argument 3 should be an uint32_t");
