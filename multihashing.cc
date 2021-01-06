@@ -141,8 +141,8 @@ DECLARE_FUNC(scrypt) {
    if(!Buffer::HasInstance(target))
        RETURN_EXCEPT("Argument should be a buffer object.");
 
-   unsigned int nValue = args[1]->Uint32Value(isolate->GetCurrentContext());
-   unsigned int rValue = args[2]->Uint32Value(isolate->GetCurrentContext());
+   unsigned int nValue = args[1]->Uint32Value(isolate->GetCurrentContext()).ToLocal();
+   unsigned int rValue = args[2]->Uint32Value(isolate->GetCurrentContext()).ToLocal();
 
    char * input = Buffer::Data(target);
    char output[32];
@@ -165,7 +165,7 @@ DECLARE_FUNC(scryptn) {
    if(!Buffer::HasInstance(target))
        RETURN_EXCEPT("Argument should be a buffer object.");
 
-   unsigned int nFactor = args[1]->Uint32Value(isolate->GetCurrentContext());
+   unsigned int nFactor = args[1]->Uint32Value(isolate->GetCurrentContext()).ToLocal();
 
    char * input = Buffer::Data(target);
    char output[32];
@@ -191,10 +191,10 @@ DECLARE_FUNC(scryptjane) {
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("First should be a buffer object.");
 
-    int timestamp = args[1]->Int32Value(isolate->GetCurrentContext());
-    int nChainStartTime = args[2]->Int32Value(isolate->GetCurrentContext());
-    int nMin = args[3]->Int32Value(isolate->GetCurrentContext());
-    int nMax = args[4]->Int32Value(isolate->GetCurrentContext());
+    int timestamp = args[1]->Int32Value(isolate->GetCurrentContext()).ToLocal();
+    int nChainStartTime = args[2]->Int32Value(isolate->GetCurrentContext()).ToLocal();
+    int nMin = args[3]->Int32Value(isolate->GetCurrentContext()).ToLocal();
+    int nMax = args[4]->Int32Value(isolate->GetCurrentContext()).ToLocal();
 
     char * input = Buffer::Data(target);
     char output[32];
@@ -371,7 +371,7 @@ DECLARE_FUNC(cryptonightturtle) {
         if(args[1]->IsBoolean())
             fast = args[1]->BooleanValue(isolate);
         else if(args[1]->IsUint32())
-            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
+            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext()).ToLocal();
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
@@ -409,7 +409,7 @@ DECLARE_FUNC(cryptonightturtlelite) {
         if(args[1]->IsBoolean())
             fast = args[1]->BooleanValue(isolate);
         else if(args[1]->IsUint32())
-            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
+            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext()).ToLocal();
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
@@ -445,9 +445,9 @@ DECLARE_FUNC(cryptonightfast) {
 
     if (args.Length() >= 2) {
         if(args[1]->IsBoolean())
-            fast = args[1]->BooleanValue(isolate);
+            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
         else if(args[1]->IsUint32())
-            cn_variant = args[1]->Uint32Value(isolate);
+            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext()).ToLocal();
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
@@ -486,14 +486,14 @@ DECLARE_FUNC(cryptonightsoftshell) {
         if(args[1]->IsBoolean())
             fast = args[1]->BooleanValue(isolate);
         else if(args[1]->IsUint32())
-            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
+            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext()).ToLocal();
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
 
     if (args.Length() >= 3) {
       if (args[2]->IsUint32())
-        height = args[2]->Uint32Value(isolate->GetCurrentContext());
+        height = args[2]->Uint32Value(isolate->GetCurrentContext()).ToLocal();
       else
         RETURN_EXCEPT("Argument 3 should be an uint32_t");
     }
@@ -606,7 +606,7 @@ DECLARE_FUNC(boolberry) {
 
     if(args.Length() >= 3) {
         if(args[2]->IsUint32())
-            height = args[2]->Uint32Value(isolate->GetCurrentContext());
+            height = args[2]->Uint32Value(isolate->GetCurrentContext()).ToLocal();
         else
             RETURN_EXCEPT("Argument 3 should be an unsigned integer.");
     }
