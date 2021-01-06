@@ -3,6 +3,7 @@
 #include <v8.h>
 #include <stdint.h>
 #include <cstring>
+#include <nan.h>
 
 extern "C" {
     #include "argon2.h"
