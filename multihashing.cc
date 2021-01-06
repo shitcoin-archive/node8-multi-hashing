@@ -95,7 +95,7 @@ using namespace v8;
     if (args.Length() < 1) \
         RETURN_EXCEPT("You must provide one argument."); \
  \
-    Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext()); \
+    Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext()).ToLocal(); \
  \
     if(!Buffer::HasInstance(target)) \
         RETURN_EXCEPT("Argument should be a buffer object."); \
@@ -216,7 +216,7 @@ DECLARE_FUNC(cryptonight) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
+        if(args[1]->IsBoolean())
             fast = args[1]->BooleanValue(isolate);
         else if(args[1]->IsUint32(isolate->GetCurrentContext()))
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
@@ -606,7 +606,7 @@ DECLARE_FUNC(boolberry) {
 
     if(args.Length() >= 3) {
         if(args[2]->IsUint32())
-            height = args[2]->Uint32Value(isolate->GetCurrentContext()).ToLocal();
+            height = args[2]->	MaybeLocal(Uint32Value(isolate->GetCurrentContext()));
         else
             RETURN_EXCEPT("Argument 3 should be an unsigned integer.");
     }
