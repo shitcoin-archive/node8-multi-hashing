@@ -95,7 +95,7 @@ using namespace v8;
     if (args.Length() < 1) \
         RETURN_EXCEPT("You must provide one argument."); \
  \
-    Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext()).ToLocal(); \
+    Local<Object> target = FromMaybe(args[0]->ToObject(isolate->GetCurrentContext())); \
  \
     if(!Buffer::HasInstance(target)) \
         RETURN_EXCEPT("Argument should be a buffer object."); \
@@ -606,7 +606,7 @@ DECLARE_FUNC(boolberry) {
 
     if(args.Length() >= 3) {
         if(args[2]->IsUint32())
-            height = MaybeLocal(args[2]->Uint32Value(isolate->GetCurrentContext()));
+            height = MaybeLocal(args[2]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 3 should be an unsigned integer.");
     }
