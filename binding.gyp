@@ -67,7 +67,8 @@
             ],
             "include_dirs": [
                 "crypto",
-                "argon2/include"
+                "argon2/include",
+                "<!(node -e \"require('nan')\")"
             ],
             "cflags_cc": [
                 "-std=c++0x",
