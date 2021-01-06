@@ -95,7 +95,7 @@ using namespace v8;
     if (args.Length() < 1) \
         RETURN_EXCEPT("You must provide one argument."); \
  \
-    Local<Object> target = FromMaybe(args[0]->ToObject(isolate->GetCurrentContext())); \
+    Local<Object> target = Local(args[0]->ToObject(isolate->GetCurrentContext())); \
  \
     if(!Buffer::HasInstance(target)) \
         RETURN_EXCEPT("Argument should be a buffer object."); \
