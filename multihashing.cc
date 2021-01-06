@@ -606,7 +606,7 @@ DECLARE_FUNC(boolberry) {
 
     if(args.Length() >= 3) {
         if(args[2]->IsUint32())
-            height = args[2]->	MaybeLocal(Uint32Value(isolate->GetCurrentContext()));
+            height = MaybeLocal(args[2]->Uint32Value(isolate->GetCurrentContext()));
         else
             RETURN_EXCEPT("Argument 3 should be an unsigned integer.");
     }
