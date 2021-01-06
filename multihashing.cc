@@ -95,7 +95,7 @@ using namespace v8;
     if (args.Length() < 1) \
         RETURN_EXCEPT("You must provide one argument."); \
  \
-    Local<Object> target = args[0]->ToObject(isolate); \
+    Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext()); \
  \
     if(!Buffer::HasInstance(target)) \
         RETURN_EXCEPT("Argument should be a buffer object."); \
@@ -217,7 +217,7 @@ DECLARE_FUNC(cryptonight) {
 
     if (args.Length() >= 2) {
         if(args[1]->IsBoolean(isolate->GetCurrentContext()))
-            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
+            fast = args[1]->BooleanValue();
         else if(args[1]->IsUint32(isolate->GetCurrentContext()))
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
@@ -254,8 +254,8 @@ DECLARE_FUNC(cryptonightdark) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
-            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
+        if(args[1]->IsBoolean())
+            fast = args[1]->BooleanValue();
         else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
@@ -292,9 +292,9 @@ DECLARE_FUNC(cryptonightdarklite) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
-            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
-        else if(args[1]->IsUint32(isolate->GetCurrentContext()))
+        if(args[1]->IsBoolean())
+            fast = args[1]->BooleanValue();
+        else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
@@ -330,9 +330,9 @@ DECLARE_FUNC(cryptonightlite) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
-            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
-        else if(args[1]->IsUint32(isolate->GetCurrentContext()))
+        if(args[1]->IsBoolean())
+            fast = args[1]->BooleanValue();
+        else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
@@ -368,9 +368,9 @@ DECLARE_FUNC(cryptonightturtle) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
-            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
-        else if(args[1]->IsUint32(isolate->GetCurrentContext()))
+        if(args[1]->IsBoolean())
+            fast = args[1]->BooleanValue();
+        else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
@@ -406,9 +406,9 @@ DECLARE_FUNC(cryptonightturtlelite) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
-            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
-        else if(args[1]->IsUint32(isolate->GetCurrentContext()))
+        if(args[1]->IsBoolean())
+            fast = args[1]->BooleanValue();
+        else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
@@ -444,9 +444,9 @@ DECLARE_FUNC(cryptonightfast) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate))
+        if(args[1]->IsBoolean())
             fast = args[1]->BooleanValue(isolate);
-        else if(args[1]->IsUint32(isolate))
+        else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(isolate);
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
@@ -483,9 +483,9 @@ DECLARE_FUNC(cryptonightsoftshell) {
       RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
-            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
-        else if(args[1]->IsUint32(isolate))
+        if(args[1]->IsBoolean())
+            fast = args[1]->BooleanValue();
+        else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
@@ -605,8 +605,8 @@ DECLARE_FUNC(boolberry) {
         RETURN_EXCEPT("Argument 2 should be a buffer object.");
 
     if(args.Length() >= 3) {
-        if(args[2]->IsUint32(isolate))
-            height = args[2]->Uint32Value(isolate);
+        if(args[2]->IsUint32())
+            height = args[2]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 3 should be an unsigned integer.");
     }
