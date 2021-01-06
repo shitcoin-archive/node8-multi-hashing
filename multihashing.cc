@@ -136,13 +136,13 @@ DECLARE_FUNC(scrypt) {
    if (args.Length() < 3)
        RETURN_EXCEPT("You must provide buffer to hash, N value, and R value");
 
-   Local<Object> target = args[0]->ToObject(isolate);
+   Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext());
 
    if(!Buffer::HasInstance(target))
        RETURN_EXCEPT("Argument should be a buffer object.");
 
-   unsigned int nValue = args[1]->Uint32Value(isolate);
-   unsigned int rValue = args[2]->Uint32Value(isolate);
+   unsigned int nValue = args[1]->Uint32Value(isolate->GetCurrentContext());
+   unsigned int rValue = args[2]->Uint32Value(isolate->GetCurrentContext());
 
    char * input = Buffer::Data(target);
    char output[32];
@@ -160,12 +160,12 @@ DECLARE_FUNC(scryptn) {
    if (args.Length() < 2)
        RETURN_EXCEPT("You must provide buffer to hash and N factor.");
 
-   Local<Object> target = args[0]->ToObject(isolate);
+   Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext());
 
    if(!Buffer::HasInstance(target))
        RETURN_EXCEPT("Argument should be a buffer object.");
 
-   unsigned int nFactor = args[1]->Uint32Value(isolate);
+   unsigned int nFactor = args[1]->Uint32Value(isolate->GetCurrentContext());
 
    char * input = Buffer::Data(target);
    char output[32];
@@ -186,15 +186,15 @@ DECLARE_FUNC(scryptjane) {
     if (args.Length() < 5)
         RETURN_EXCEPT("You must provide two argument: buffer, timestamp as number, and nChainStarTime as number, nMin, and nMax");
 
-    Local<Object> target = args[0]->ToObject(isolate);
+    Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext());
 
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("First should be a buffer object.");
 
-    int timestamp = args[1]->Int32Value(isolate);
-    int nChainStartTime = args[2]->Int32Value(isolate);
-    int nMin = args[3]->Int32Value(isolate);
-    int nMax = args[4]->Int32Value(isolate);
+    int timestamp = args[1]->Int32Value(isolate->GetCurrentContext());
+    int nChainStartTime = args[2]->Int32Value(isolate->GetCurrentContext());
+    int nMin = args[3]->Int32Value(isolate->GetCurrentContext());
+    int nMax = args[4]->Int32Value(isolate->GetCurrentContext());
 
     char * input = Buffer::Data(target);
     char output[32];
@@ -216,15 +216,15 @@ DECLARE_FUNC(cryptonight) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate))
-            fast = args[1]->BooleanValue(isolate);
-        else if(args[1]->IsUint32(isolate))
-            cn_variant = args[1]->Uint32Value(isolate);
+        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
+            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
+        else if(args[1]->IsUint32(isolate->GetCurrentContext()))
+            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
 
-    Local<Object> target = args[0]->ToObject(isolate);
+    Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext());
 
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("Argument should be a buffer object.");
@@ -254,15 +254,15 @@ DECLARE_FUNC(cryptonightdark) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate))
-            fast = args[1]->BooleanValue(isolate);
+        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
+            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
         else if(args[1]->IsUint32())
-            cn_variant = args[1]->Uint32Value(isolate);
+            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
 
-    Local<Object> target = args[0]->ToObjectisolate(isolate);
+    Local<Object> target = args[0]->ToObjectisolate(isolate->GetCurrentContext());
 
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("Argument should be a buffer object.");
@@ -292,15 +292,15 @@ DECLARE_FUNC(cryptonightdarklite) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate))
-            fast = args[1]->BooleanValue(isolate);
-        else if(args[1]->IsUint32(isolate))
-            cn_variant = args[1]->Uint32Value(isolate);
+        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
+            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
+        else if(args[1]->IsUint32(isolate->GetCurrentContext()))
+            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
 
-    Local<Object> target = args[0]->ToObject(isolate);
+    Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext());
 
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("Argument should be a buffer object.");
@@ -330,15 +330,15 @@ DECLARE_FUNC(cryptonightlite) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate))
-            fast = args[1]->BooleanValue(isolate);
-        else if(args[1]->IsUint32(isolate))
-            cn_variant = args[1]->Uint32Value(isolate);
+        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
+            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
+        else if(args[1]->IsUint32(isolate->GetCurrentContext()))
+            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
 
-    Local<Object> target = args[0]->ToObject();
+    Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext());
 
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("Argument should be a buffer object.");
@@ -368,15 +368,15 @@ DECLARE_FUNC(cryptonightturtle) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate))
-            fast = args[1]->BooleanValue(isolate);
-        else if(args[1]->IsUint32(isolate))
-            cn_variant = args[1]->Uint32Value(isolate);
+        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
+            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
+        else if(args[1]->IsUint32(isolate->GetCurrentContext()))
+            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
 
-    Local<Object> target = args[0]->ToObject();
+    Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext());
 
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("Argument should be a buffer object.");
@@ -406,15 +406,15 @@ DECLARE_FUNC(cryptonightturtlelite) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate))
-            fast = args[1]->BooleanValue(isolate);
-        else if(args[1]->IsUint32(isolate))
-            cn_variant = args[1]->Uint32Value(isolate);
+        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
+            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
+        else if(args[1]->IsUint32(isolate->GetCurrentContext()))
+            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
 
-    Local<Object> target = args[0]->ToObject(isolate);
+    Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext());
 
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("Argument should be a buffer object.");
@@ -452,7 +452,7 @@ DECLARE_FUNC(cryptonightfast) {
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
 
-    Local<Object> target = args[0]->ToObject(isolate);
+    Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext());
 
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("Argument should be a buffer object.");
@@ -483,17 +483,17 @@ DECLARE_FUNC(cryptonightsoftshell) {
       RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean(isolate))
-            fast = args[1]->BooleanValue(isolate);
+        if(args[1]->IsBoolean(isolate->GetCurrentContext()))
+            fast = args[1]->BooleanValue(isolate->GetCurrentContext());
         else if(args[1]->IsUint32(isolate))
-            cn_variant = args[1]->Uint32Value(isolate);
+            cn_variant = args[1]->Uint32Value(isolate->GetCurrentContext());
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
 
     if (args.Length() >= 3) {
-      if (args[2]->IsUint32(isolate))
-        height = args[2]->Uint32Value(isolate);
+      if (args[2]->IsUint32(isolate->GetCurrentContext()))
+        height = args[2]->Uint32Value(isolate->GetCurrentContext());
       else
         RETURN_EXCEPT("Argument 3 should be an uint32_t");
     }
@@ -515,14 +515,14 @@ DECLARE_FUNC(cryptonightsoftshell) {
 
     if (args.Length() >= 5) {
       if (args[4]->IsUint32())
-        CN_SOFT_SHELL_WINDOW = args[4]->Uint32Value(isolate);
+        CN_SOFT_SHELL_WINDOW = args[4]->Uint32Value(isolate->GetCurrentContext());
       else
         RETURN_EXCEPT("Argument 6 should be an uint32_t (window)");
     }
 
     if (args.Length() >= 6) {
       if (args[5]->IsUint32())
-        CN_SOFT_SHELL_MULTIPLIER = args[5]->Uint32Value(isolate);
+        CN_SOFT_SHELL_MULTIPLIER = args[5]->Uint32Value(isolate->GetCurrentContext());
       else
         RETURN_EXCEPT("Argument 6 should be an uint32_t (multiplier)");
     }
@@ -530,7 +530,7 @@ DECLARE_FUNC(cryptonightsoftshell) {
     uint32_t CN_SOFT_SHELL_PAD_MULTIPLIER = (CN_SOFT_SHELL_WINDOW / CN_SOFT_SHELL_MULTIPLIER);
     uint32_t CN_SOFT_SHELL_ITER_MULTIPLIER = (CN_SOFT_SHELL_PAD_MULTIPLIER / 2);
 
-    Local<Object> target = args[0]->ToObject(isolate);
+    Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext());
 
     uint32_t base_offset = (height % CN_SOFT_SHELL_WINDOW);
     int32_t offset = (height % (CN_SOFT_SHELL_WINDOW * 2)) - (base_offset * 2);
@@ -594,8 +594,8 @@ DECLARE_FUNC(boolberry) {
     if (args.Length() < 2)
         RETURN_EXCEPT("You must provide two arguments.");
 
-    Local<Object> target = args[0]->ToObject(isolate);
-    Local<Object> target_spad = args[1]->ToObject(isolate);
+    Local<Object> target = args[0]->ToObject(isolate->GetCurrentContext());
+    Local<Object> target_spad = args[1]->ToObject(isolate->GetCurrentContext());
     uint32_t height = 1;
 
     if(!Buffer::HasInstance(target))
